@@ -9,6 +9,10 @@ public class ObjectMove : MonoBehaviour
     [SerializeField] private float curSpeed;
     private bool hasStopped = false;
 
+    private void Awake()
+    {
+        movingObject.Speed = 0.1f;
+    }
     private void Start()
     {
         curSpeed = movingObject.Speed;
