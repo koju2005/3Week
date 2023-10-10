@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidbody;
     private bool Timebool;
     public static PlayerController instance;
+
+    private Vector3 curSavePoint = Vector3.zero;
     private void Awake()
     {
         instance = this;
@@ -96,6 +98,14 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+
+    public void OnSaveInput(InputAction.CallbackContext val)
+    {
+        if(val.phase == InputActionPhase.Started)
+        {
+            transform.position = curSavePoint;
+        }
+    }
     public void OnTimeInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
@@ -134,6 +144,20 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.layer == 7)
+        {
+            curSavePoint = collision.transform.position;
+            collision.gameObject.SetActive(false);
+        }
+
+        else if (collision.gameObject.layer == 8)
+        {
+            _rigidbody.AddForce(Vector2.up * jumpForce*5, ForceMode.Impulse);
+        }
     }
 
 }
