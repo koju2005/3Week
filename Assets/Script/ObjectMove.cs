@@ -6,12 +6,12 @@ using UnityEngine;
 public class ObjectMove : MonoBehaviour
 {
     public MovingObject movingObject;
-    [SerializeField] private float curSpeed;
+    private float curSpeed;
     private bool hasStopped = false;
 
     private void Awake()
     {
-        movingObject.Speed = 0.1f;
+        movingObject.Speed = 5f;
     }
     private void Start()
     {
@@ -35,7 +35,7 @@ public class ObjectMove : MonoBehaviour
                 StartCoroutine(ResetSpeedAfterDelay(movingObject.StopTime));
             }
         }
-        transform.position += new Vector3(0, movingObject.Speed, 0);
+        transform.position += new Vector3(0, movingObject.Speed*Time.deltaTime, 0);
     }
 
     private IEnumerator ResetSpeedAfterDelay(float delay)
@@ -43,12 +43,12 @@ public class ObjectMove : MonoBehaviour
         yield return new WaitForSeconds(delay);
         if (transform.position.y >= movingObject.WantY)
         {
-             transform.position += new Vector3(0, -curSpeed, 0);
+             transform.position += new Vector3(0, -0.1f, 0);
             movingObject.Speed = -curSpeed;
         }
         else
         {
-            transform.position += new Vector3(0, curSpeed, 0);
+            transform.position += new Vector3(0, 0.1f, 0);
             movingObject.Speed = curSpeed;
         }
         hasStopped = false;

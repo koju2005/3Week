@@ -64,14 +64,11 @@ public class Editor : EditorWindow
             {
                 GameObject selectedPrefab = prefabList[selectedPrefabIndex];
                 GameObject newPrefabInstance = Instantiate(selectedPrefab) as GameObject;
-                Debug.Log("1");
                 if (newPrefabInstance != null)
                 {
-                    Debug.Log("2");
                     SceneView sceneView = SceneView.lastActiveSceneView;
                     if (sceneView != null)
                     {
-                        Debug.Log("3");
                         Vector3 spawnPosition = sceneView.camera.transform.position + sceneView.camera.transform.forward * 5f;
                         newPrefabInstance.transform.position = spawnPosition;
                         newPrefabInstance.transform.parent = GameObject.Find("Structure").transform;

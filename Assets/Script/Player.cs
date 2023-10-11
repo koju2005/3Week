@@ -120,7 +120,6 @@ public class PlayerController : MonoBehaviour
            else if(Timebool == true)
             {
                 Time.timeScale = 1;
-            //    Time.fixedDeltaTime = Time.timeScale;
                 Timebool = false;
             }
           
