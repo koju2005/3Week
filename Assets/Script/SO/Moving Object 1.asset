@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f340be45aa44d1d4c905ccb775e9fcc3, type: 3}
   m_Name: Moving Object 1
   m_EditorClassIdentifier: 
-  Speed: 0.1
+  Speed: -5
   StopTime: 1
   WantY: 42
   MinY: 18
+  HowMoving: 1

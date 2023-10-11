@@ -8,4 +8,7 @@ public class MovingObject : ScriptableObject
     public float StopTime;
     public float WantY;
     public float MinY;
+
+    public string HowMoving; // 1. 수직  2. 수평
+
 }

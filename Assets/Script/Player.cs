@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using UnityEditor.Build;
 using UnityEngine;
@@ -147,7 +148,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.layer == 7)
+        if (collision.gameObject.layer == 6)
+        {
+            curSavePoint = Vector3.zero;
+            for(int i = 0; i< GameManager.Instance.savePoint.Length;i++)
+            {
+                GameManager.Instance.savePoint[i].SetActive(true);
+            }
+        }
+        if (collision.gameObject.layer == 7)
         {
             curSavePoint = collision.transform.position;
             collision.gameObject.SetActive(false);
@@ -155,7 +164,7 @@ public class PlayerController : MonoBehaviour
 
         else if (collision.gameObject.layer == 8)
         {
-            _rigidbody.AddForce(Vector2.up * jumpForce*5, ForceMode.Impulse);
+            _rigidbody.AddForce(Vector2.up * jumpForce*2, ForceMode.Impulse);
         }
     }
 

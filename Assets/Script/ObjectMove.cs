@@ -15,24 +15,32 @@ public class ObjectMove : MonoBehaviour
     }
     private void Start()
     {
-        curSpeed = movingObject.Speed;
+        curSpeed = movingObject.Speed; //정지 후 재 움직임을 위해 최근속도 가져옴
     }
 
     private void FixedUpdate()
     {
         if (!hasStopped)
         {
-            if (transform.position.y >= movingObject.WantY)
-            {
-                movingObject.Speed = 0;
-                hasStopped = true;
-                StartCoroutine(ResetSpeedAfterDelay(movingObject.StopTime));
+            if (movingObject.HowMoving == "1") //수직운동
+            { 
+                 if (transform.position.y >= movingObject.WantY) //원하는 Y좌표 도착 시 일정 시간 정지 후 재 움직임
+                {
+                     movingObject.Speed = 0;
+                     hasStopped = true;
+                     StartCoroutine(ResetSpeedAfterDelay(movingObject.StopTime));
+                }
+                else if (transform.position.y <= movingObject.MinY) //원하는 Y좌표 도착 시 일정 시간 정지 후 재 움직임
+                {
+                     movingObject.Speed = 0;
+                     hasStopped = true;
+                     StartCoroutine(ResetSpeedAfterDelay(movingObject.StopTime));
+                }
             }
-            else if (transform.position.y <= movingObject.MinY)
+
+            if (movingObject.HowMoving == "2") //수평운동
             {
-                movingObject.Speed = 0;
-                hasStopped = true;
-                StartCoroutine(ResetSpeedAfterDelay(movingObject.StopTime));
+            
             }
         }
         transform.position += new Vector3(0, movingObject.Speed*Time.deltaTime, 0);
